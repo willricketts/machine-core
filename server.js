@@ -1,0 +1,35 @@
+var prompt = require('prompt');
+var process = require('process');
+var clc = require('cli-color');
+
+prompt.message = "";
+
+prompt.start();
+
+function main() {
+  prompt.get(['x'], function(err, result) {
+    if(err) {
+      console.log(clc.red.bgWhite('ERROR: ' + err));
+      process.exit(1);
+    }
+    else {
+      parseCommand(result.x);
+    }
+  });
+}
+
+function parseCommand(cmd) {
+  switch(cmd) {
+      case 'exit':
+        process.exit(0);
+        break;
+      case 'help':
+        console.log(clc.red('Not implemented'));
+        break;
+      default:
+        console.log(clc.cyanBright('Invalid command'));
+    }
+  main();
+}
+
+main();
